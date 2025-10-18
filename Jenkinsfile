@@ -1,12 +1,11 @@
 pipeline {
-    agent {
-        docker { image 'node:18-alpine' }
-    }
+    agent any
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'node --version'
-                sh 'npm install'
+                script {
+                    def myImage = docker.build('my-simple-app')
+                }
             }
         }
     }
